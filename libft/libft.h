@@ -61,6 +61,8 @@ int ft_atoi(const char *nptr);
 long ft_atol(const char *str);
 char *ft_itoa(int n);
 int	ft_atoi_safe(char *str, long *result);
+int	ft_atoi_base(char *str, int base);
+
 
 //Bonus part 
 typedef struct s_list

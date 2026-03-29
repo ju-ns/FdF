@@ -1,46 +1,8 @@
 #include "matrix.h"
 #include "libft.h"
 #include "fdf.h"
-/*
-Utilitaria: libera a array depois de alocar 
-a memória com split
-*/
-void	free_split(char **str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
-}
-/*
-Utilitária: conta quantos tokens existem numa linha
-do arquivo, retorna o width da matriz
-*/
-int count_cols(const char *str)
-{
-    int is_space;
-    int i;
-    int count;
 
-    i = 0;
-    is_space = 1;
-    count = 0;
-
-    while(str[i])
-    {
-        if(str[i] == ' ')
-            is_space = 1;
-        if(str[i] != ' ' && is_space)
-        {
-            count++;
-            is_space = 0;
-        }
-        i++; 
-    }
-    return (count);
-}
 /*
 Utilitária para prencher os dados
 */
@@ -59,7 +21,8 @@ static int fill_points(t_matrix *matrix, char **tokens, int y)
             return (0);
         p->x = x;
         p->y = y;
-        p->z = ft_atoi(tokens[x]);
+        p->z = parse_z(tokens[x]);
+        p->color = parse_color(tokens[x]);
         x++;
     }
     return (x == matrix->width);

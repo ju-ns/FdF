@@ -2,22 +2,11 @@
 #include "matrix.h"
 #include <fcntl.h>
 
-/*
-Valida se a extensão do arquivo está correta,
-caso não se trate de um arquivo .fdf retorna zero
-*/
-static int valid_extension(const char *str)
+
+int is_valid_token(char *str)
 {
-    int len;
-    len = ft_strlen(str);
-
-    if(len < 5)
-        return (0);
-    if(!ft_strncmp(str + len - 4,".fdf", 4))
-        return (1);
-    return (0);
+    if(!)
 }
-
 
 /*
 Faz a segunda passagem pelo arquivo, preenchendo a matriz

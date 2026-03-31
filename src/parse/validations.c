@@ -63,3 +63,22 @@ int valid_extension(const char *str)
         return (1);
     return (0);
 }
+
+/*
+Centraliza as validações executadas em
+is_valid_color e is_valid_token
+*/
+int is_valid_token(char *str)
+{
+    char ** arr;
+    if(!str)
+        return (0);
+    arr = ft_split(str, ',');
+    if(!is_valid_int(arr[0]))
+        return (0);
+    if(arr[1])
+        if(!is_valid_color(arr[1]))
+            return (0);
+    free(arr);
+    return (1);
+}

@@ -21,6 +21,8 @@ static int fill_points(t_matrix *matrix, char **tokens, int y)
             return (0);
         p->x = x;
         p->y = y;
+        if(!is_valid_token(tokens[x]))
+            return (0);
         p->z = parse_z(tokens[x]);
         p->color = parse_color(tokens[x]);
         x++;

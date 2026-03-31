@@ -2,12 +2,6 @@
 #include "matrix.h"
 #include <fcntl.h>
 
-
-int is_valid_token(char *str)
-{
-    if(!)
-}
-
 /*
 Faz a segunda passagem pelo arquivo, preenchendo a matriz
 abre o arquivo novamente, lê linha por linha e para cada linha chama o parse_line

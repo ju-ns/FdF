@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnogueir <jnogueir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/31 16:09:06 by jnogueir          #+#    #+#             */
+/*   Updated: 2026/03/31 16:10:34 by jnogueir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 /*
@@ -13,14 +25,16 @@ void	free_split(char **str)
 		free(str[i++]);
 	free(str);
 }
+
 /*
-Utilitaria: responsável pela limpeza e fechamento do fd, retorna o exit_code determinado pelo user
+Utilitaria: responsável pela limpeza e fechamento do fd, 
+retorna o exit_code determinado pelo user
 */
-int cleanup(char *line, int fd, int exit_code)
+int	cleanup(char *line, int fd, int exit_code)
 {
-    free(line);
-    close(fd);
-    return (exit_code);
+	free(line);
+	close(fd);
+	return (exit_code);
 }
 
 

@@ -41,13 +41,16 @@ retorna NULL se houver algo errado
 */
 s_point *matrix_get(t_matrix *matrix, int x, int y)
 {
+    s_point *data;
+    
     if(!matrix)
         return (NULL);
     if (x < 0 || y < 0)
         return (NULL);
     if (x >= matrix->width || y >= matrix->height)
         return (NULL);
-    return (&matrix->data[y * matrix->width + x]);
+    data = (s_point *)matrix->data;
+    return (&data[y * matrix->width + x]);
 }
 
 /*
@@ -55,11 +58,13 @@ Altera os dados armazenados pelo s_point dentro da matriz
 */
 void	matrix_set(t_matrix *matrix, int x, int y, s_point value)
 {
-     if(!matrix)
+    s_point *data;
+    if(!matrix)
         return ;
     if (x < 0 || y < 0)
         return ;
     if (x >= matrix->width || y >= matrix->height)
         return ;
-    matrix->data[y * matrix->width + x] = value;
+    data = matrix->data;
+    data[y * matrix->width + x] = value;
 }

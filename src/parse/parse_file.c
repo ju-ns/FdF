@@ -63,7 +63,7 @@ t_matrix	*parse_file(const char *filename)
 		return (NULL);
 	if (!get_map_size(filename, &width, &height))
 		return (NULL);
-	matrix = matrix_create(height, width);
+	matrix = matrix_create(width, height);
 	if (!matrix)
 		return (NULL);
 	if (!fill_matrix(filename, matrix))

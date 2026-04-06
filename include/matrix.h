@@ -8,8 +8,8 @@ Encapsula a estrutura de dados matriz, implementada no tad_matrix.c
 typedef struct matrix
 {
     void *data; //dados do s_point
-	int height; //colunas
-	int width; //linhas
+	int height; //linhas
+	int width; //colunas
 } t_matrix;
 
 /*
@@ -23,6 +23,7 @@ Leitura e escrita de dados
 */
 void	*matrix_get(t_matrix *matrix, int x, int y);
 void	matrix_set(t_matrix *matrix, int x, int y, s_point value);
+t_matrix	*parse_file(const char *filename);
 
 
 

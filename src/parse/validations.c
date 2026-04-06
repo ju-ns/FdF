@@ -92,6 +92,6 @@ int	is_valid_token(char *str)
 	if (arr[1])
 		if (!is_valid_color(arr[1]))
 			return (0);
-	free(arr);
+	free_split(arr);
 	return (1);
 }

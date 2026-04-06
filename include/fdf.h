@@ -40,7 +40,6 @@ typedef struct fdf
     int z_scale;
 } t_fdf;
 
-t_fdf *init_fdf(char *filename);
 
 
 

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft.h"
 #include "get_next_line.h"
 
 size_t	gnl_strlen(const char *s)

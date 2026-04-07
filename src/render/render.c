@@ -1,8 +1,8 @@
 #include "fdf.h"
-#include "matrix.h"
 #include "mlx.h"
 #include "render.h"
 #include "libft.h"
+#include "project.h"
 
 
 void clear_image(t_fdf *fdf)

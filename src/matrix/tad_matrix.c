@@ -1,6 +1,4 @@
 #include "matrix.h"
-#include "fdf.h"
-#include <stdlib.h>
 
 /*
 Cria a estrutura e aloca memório para os s_points

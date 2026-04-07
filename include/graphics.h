@@ -1,5 +1,7 @@
 #ifndef GRAPHICS_H
-#ifdef GRAPHICS_H
+#define GRAPHICS_H
+
+#include "fdf.h"
 
 /*
 centraliza as funções responsaveis pela implementação gráfica
@@ -12,3 +14,4 @@ int get_image_addr(t_fdf *win_struct);
 
 
 
+#endif

@@ -12,6 +12,8 @@ t_fdf    *init_screen(int width, int height)
     win_struct = malloc(sizeof(t_fdf));
     if(!win_struct)
         return (NULL);
+    win_struct->width = width;
+    win_struct->height = height;
     win_struct->data_screen = mlx_init(); //inicializo
     if(!win_struct->data_screen)
     {

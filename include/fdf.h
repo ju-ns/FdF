@@ -1,107 +1,30 @@
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
 #define DEFAULT_COLOR 0xFFFFFF
-
-/*
-Responsável por guardar as cordenadas do 
-input
-*/
-typedef struct point
-{
-    int x;
-    int y;
-    int z;
-    int color;
-    int screen_y;
-    int screen_x;
-} s_point;
-
+#include "matrix.h"
 
 typedef struct fdf 
 {
     void *data_screen;
     void *win;
-    void *img;
-    char *addr;
+    void *img; //ponteiro da imagem, retornado pelo mlx_new_image
+    char *addr; //endereço do primeiro pixel na memoria
     
-    int bits_per_pixel;
-    int line_length;
-    int endian;
+    int bits_per_pixel; //quantos bits representa cada pixel
+    int line_length; // quantos bytes tem cada linha horizontal da imagem
+    int endian; // a ordem dos bbytes da cor 
 
     t_matrix *matrix;
     
-    int width;
-    int height;
+    int width; //colunas 
+    int height; // linhas
 
-    int offset_x;
+    int offset_x; //valores somados de screen_x e screen_y de cada ponto para centralizar o mapa na janela
     int offset_y;
-    int tile_size;
-    int z_scale;
+    int tile_size; //tamanho em pixel de cada "quadradinho" do mapa, controla quao grande o mapa aparece na tela
+    int z_scale; // fator que controla o quanto de altura z afeta visualmente o mapa
 } t_fdf;
-
-
-
-
-/*
-Parsing
-*/
-int get_map_size(const char *filename, int *width, int *height);
-int parse_line(t_matrix *matrix, char *line, int y);
-int count_cols(const char *str);
-void	free_split(char **str);
-int cleanup(char *line, int fd, int exit_code);
-int parse_z(char *token);
-int parse_color(char *token);
-
-
-/*
-Validações para o parse,
-estão no arquivo validations
-*/
-int is_valid_int(char *str);
-int is_valid_color(char *str);
-int valid_extension(const char *str);
-
-
-/*
-utils do render
-*/
-int ft_abs(int n);
-void init_line(t_line *line, s_point *a, s_point *b);
-int total_steps(t_line *line);
-void destroy_fdf(t_fdf *fdf);
-
-
-/*
-aplicação do algoritmo de breshman
-*/
-void    draw_line(t_fdf *fdf, s_point a, s_point b);
-
-
-/*
-tratamento de cor
-*/
-int interpolate_color(int color1, int color2, float t);
-
-/*
-Apoio para o hook
-*/
-int close_window(t_fdf *fdf);
-int key_handler(int keycode, t_fdf *fdf);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif

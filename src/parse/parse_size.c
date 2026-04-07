@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include "matrix.h"
+#include "parse.h"
+#include "gnl/get_next_line.h"
 
 /*
 Utilitária: conta quantos tokens existem numa linha

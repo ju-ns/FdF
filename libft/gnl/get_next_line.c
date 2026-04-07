@@ -10,46 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft.h"
 #include "get_next_line.h"
 
-char	*get_next_line(int fd, char **stash)
+static int	ft_stash(int fd, char **stash);
+
+
+char	*get_next_line(int fd)
 {
 	char		*line;
+	static char		*stash[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !stash)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!ft_stash(fd, stash))
+	if (!ft_stash(fd, &stash[fd]))
 		return (NULL);
-	line = extract_line(*stash);
+	if(!stash[fd])
+		return (NULL);
+	line = extract_line(stash[fd]);
 	if (!line)
 		return (NULL);
-	*stash = trim_stash(*stash);
+	stash[fd] = trim_stash(stash[fd]);
 	return (line);
 }
 
 static int	ft_stash(int fd, char **stash)
 {
-	char		*buf[BUFFER_SIZE + 1];
+	char		buf[BUFFER_SIZE + 1];
 	ssize_t		bytes;
+	char		*tmp;
 
-	if (!stash)
-		return (0);
 	bytes = 1;
 	while (!gnl_strchr(*stash, '\n') && bytes > 0)
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
 		if (bytes < 0)
 			return (0);
+		buf[bytes] = '\0';
 		if (!*stash)
 		{
-			*stash = malloc(1);
+			*stash = ft_strdup("");
 			if (!*stash)
 				return (0);
-			(*stash)[0] = '\0';
 		}
-		*stash = gnl_strjoin(*stash, buf);
-		if (!*stash)
+		tmp = gnl_strjoin(*stash, buf);
+		if (!tmp)
 			return (0);
+		*stash = tmp;
 	}
 	return (1);
 }

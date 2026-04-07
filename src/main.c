@@ -2,7 +2,8 @@
 #include "fdf.h"
 #include "render.h"
 #include "mlx.h"
-
+#include "graphics.h"
+#include "hooks.h"
 int main(int argc, char **argv)
 {
     t_fdf *fdf;

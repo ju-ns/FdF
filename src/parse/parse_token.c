@@ -10,13 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
-#include "libft.h"
 #include "fdf.h"
+#include "parse.h"
 
 
 /*
-Utilitária para prencher os dados
+Responsável por preencher os dados de entrada na matriz, pega o 
+ponteiro da estrutura s_point na posição (x, y) da matriz usando o
+matriz get, guarda x e y como cordenadas de posição do mapa. Valida o
+token com is_valid_token, extrai o valor z com parse_z e extrai a cor com
+parse_color no final verifica x == matrix->width para garantir que o numero
+de tokens bateu exatamente com a largura esperada da matriz
 */
 static	int	fill_points(t_matrix *matrix, char **tokens, int y)
 {
@@ -43,13 +47,20 @@ static	int	fill_points(t_matrix *matrix, char **tokens, int y)
 }
 
 /*
-Preenche cada s_point da linha y com as três cordenadas x y z
+Ponto de entrada, recebe uma linha inteira do arquivo como string
+e o indice y da matriz, usa a split para quebrar essa string em tokens 
+separados por espaço, cada token é um ponto da linha.
+Passa os tokens para a função fill_points para fazer o trabalho real, se algo
+falhar libera a memória e retorna 0
 */
 int	parse_line(t_matrix *matrix, char *line, int y)
 {
 	char	**tokens;
+	char	*trimmed;
 
-	tokens = ft_split(line, ' ');
+	trimmed = ft_strtrim(line, "\n");
+	tokens = ft_split(trimmed, ' ');
+	free(trimmed);
 	if (!tokens)
 		return (0);
 	if (!fill_points(matrix, tokens, y))

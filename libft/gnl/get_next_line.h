@@ -17,7 +17,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd, char **stash);
+char	*get_next_line(int fd);
 size_t	gnl_strlen(const char *s);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*gnl_strchr(const char *s, int c);
@@ -26,6 +26,10 @@ char	*trim_stash(char *stash);
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 100
+#endif
+
+#ifndef OPEN_MAX
+# define OPEN_MAX 1024
 #endif
 
 #endif

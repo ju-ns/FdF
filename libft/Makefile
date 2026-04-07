@@ -1,9 +1,10 @@
 NAME = libft.a
-SRC = $(wildcard *.c)
+SRC = $(wildcard *.c) $(wildcard gnl/*.c)
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
+
 
 all: $(NAME)
 

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "matrix.h"
-#include <fcntl.h>
+#include "parse.h"
+#include "gnl/get_next_line.h"
 
 /*
 Faz a segunda passagem pelo arquivo, preenchendo a matriz

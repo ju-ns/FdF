@@ -84,7 +84,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //ft_printf
 int ft_printf(const char *format, ...);
-char	*get_next_line(int fd, char **stash);
+
 
 
 //novas adições 

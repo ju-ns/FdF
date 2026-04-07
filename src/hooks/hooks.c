@@ -1,8 +1,6 @@
 #include "fdf.h"
 #include "mlx.h"
-#include "matrix.h"
 #include "render.h"
-#include <stdlib.h>
 
 
 void destroy_fdf(t_fdf *fdf)

@@ -34,17 +34,18 @@ SRC	= \
 
 OBJ	= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: $(NAME)
+all: $(LIBFT) $(MLX) $(NAME)
 
 $(LIBFT):
 	@echo "Building libft ..."
-	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory -s
 
 $(MLX):
-	@echo "Building mlx ..."
-	@$(MAKE) -C $(MLX_DIR) --no-print-directory
+	@echo "Building minilibx ..."
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory -s > /dev/null 2>&1
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
+	@echo "Linking $(NAME) ..."
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(NAME) Compiled with success"
 
@@ -53,11 +54,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
-	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory
+	@echo "Cleaning objects ..."
+	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory -s
+	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory -s > /dev/null 2>&1
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
+	@echo "Removing executable..."
+	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory -s
 	@rm -f $(NAME)
 	@echo "$(NAME) removed."
 

@@ -12,6 +12,7 @@
 
 #include "parse.h"
 #include "gnl/get_next_line.h"
+#include <stdio.h>
 
 /*
 Utilitária: conta quantos tokens existem numa linha
@@ -19,23 +20,23 @@ do arquivo, retorna o width da matriz
 */
 int	count_cols(const char *str)
 {
-	int	is_space;
+	int	in_token;
 	int	i;
 	int	count;
 
 	i = 0;
-	is_space = 1;
+	in_token = 0;
 	count = 0;
 
-	while (str[i])
+	while (str[i] && str[i] != '\n')
 	{
-		if (str[i] == ' ')
-			is_space = 1;
-		if (str[i] != ' ' && is_space)
+		if (str[i] != ' ' && !in_token)
 		{
 			count++;
-			is_space = 0;
+			in_token = 1;
 		}
+		else if(str[i] == ' ')
+			in_token = 0;
 		i++;
 	}
 	return (count);
@@ -60,8 +61,11 @@ int	get_map_size(const char *filename, int *width, int *height)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		cols = count_cols(line);
-		if (cols == 0)
-			return (cleanup(line, fd, 0));
+		if (cols <= 0)
+		{
+			free(line);
+			continue;
+		}
 		if (*height == 0)
 			*width = cols;
 		else if (cols != *width)
@@ -69,7 +73,6 @@ int	get_map_size(const char *filename, int *width, int *height)
 		(*height)++;
 		free(line);
 	}
-
 	close(fd);
 	return (*width > 0 && *height > 0);
 }

@@ -1,31 +1,30 @@
 #include "mlx.h"
 #include "fdf.h"
 #include <stdlib.h>
+#include "graphics.h"
+#include "libft.h"
 
 //cria a janela 
 //cria a imagem 
 //coloca a imagem na janela
 
-t_fdf    *init_screen(int width, int height)
+t_fdf    *init_screen(void)
 {
     t_fdf  *win_struct;
-    win_struct = malloc(sizeof(t_fdf));
+
+    win_struct = ft_calloc(1, sizeof(t_fdf));
+    
     if(!win_struct)
         return (NULL);
-    win_struct->width = width;
-    win_struct->height = height;
+    
     win_struct->data_screen = mlx_init(); //inicializo
     if(!win_struct->data_screen)
     {
         free(win_struct);
         return NULL;
     }
-    win_struct->win = mlx_new_window( //crio uma nova janela
-        win_struct->data_screen,
-        width,
-        height,
-        "FdF"
-    );
+    get_screen_size(win_struct);
+    win_struct->win = new_window(win_struct->data_screen, win_struct->width, win_struct->height, "FDF");
     if(!win_struct->win)
     {
         mlx_destroy_display(win_struct->data_screen);
@@ -60,3 +59,18 @@ int get_image_addr(t_fdf *win_struct)
         return (0);
     return (1);
 }
+/*
+abstração do mlx_get_screen_size para um tamanho dinamico da imagem
+*/
+void    get_screen_size(t_fdf *fdf)
+{
+    mlx_get_screen_size(fdf->data_screen, &fdf->width, &fdf->height);
+    fdf->width *= 0.9;
+}
+
+void *new_window(void *data_screen, int width, int height, char *title)
+{
+    return (mlx_new_window(data_screen, width, height, title));
+}
+
+

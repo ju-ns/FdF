@@ -12,14 +12,10 @@ t_fdf *init_fdf(char *filename)
 {
     t_fdf *fdf;
 
-    fdf = init_screen(1920, 1080);
+    fdf = init_screen();
     if(!fdf)
         return (NULL);
-    fdf->width = 1920;
-    fdf->height = 1080;
-
     fdf->matrix = parse_file(filename);
-    printf("matrix: %p\n", fdf->matrix);
     if(!fdf->matrix)
     {
         printf("parse failed\n");
@@ -30,8 +26,6 @@ t_fdf *init_fdf(char *filename)
         return (NULL);
     if(!get_image_addr(fdf))
         return (NULL);
-    printf("img: %p\n", fdf->img);
-    printf("addr: %p\n", fdf->addr);
     init_projection_params(fdf);
     return (fdf);
 }

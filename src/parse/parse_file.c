@@ -34,6 +34,11 @@ static	int	fill_matrix(const char *filename, t_matrix *matrix)
 		return (0);
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		if (count_cols(line) <= 0)   // pula linha vazia
+    	{
+        	free(line);
+        	continue;
+    	}
 		if (!parse_line(matrix, line, y))
 		{
 			free(line);
@@ -46,6 +51,7 @@ static	int	fill_matrix(const char *filename, t_matrix *matrix)
 	close(fd);
 	return (1);
 }
+
 
 /*
 Função principal do parse_file, 
